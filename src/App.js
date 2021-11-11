@@ -11,19 +11,22 @@ const App = () => {
 
   const addContact = (text) => {
     const { name, number } = text;
+    console.log(name.toLowerCase().split(" ").join(""));
     if (
       contacts.some((item) => {
-        return item.name.toLowerCase().includes(name.toLowerCase());
+        return item.name.toLowerCase() === name.toLowerCase();
       })
     ) {
       alert(`${name} is already in contacts`);
       return;
     }
+
     const contact = {
       id: v4(),
       name: name,
       number: number,
     };
+
     setContacts((prevContacts) => [contact, ...prevContacts]);
   };
 
@@ -32,9 +35,10 @@ const App = () => {
   };
 
   const filteredContacts = () => {
-    return contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
+    console.log(contacts);
+    return contacts.filter((contact) => {
+      return contact.name.toLowerCase().includes(filter.toLowerCase());
+    });
   };
 
   const delateItem = (id) => {
